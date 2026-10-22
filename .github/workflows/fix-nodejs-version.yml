@@ -1,0 +1,26 @@
+name: Fix Node.js Version to 24.x
+
+on:
+  workflow_dispatch:
+
+jobs:
+  fix-version:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Update Node.js version in package.json
+        run: |
+          sed -i 's/"node": "18.x"/"node": "24.x"/' package.json
+          cat package.json | grep -A 1 "engines"
+      
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "develops@contadordireto.com.br"
+          git config --local user.name "GitHub Actions"
+          git add package.json
+          git commit -m "fix: update Node.js version to 24.x for Vercel compatibility"
+          git push
