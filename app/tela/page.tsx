@@ -2,8 +2,7 @@
 import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 
-const QRCode = dynamic(() => import('qrcode.react'), { ssr: false  as any})
-
+const QRCode = dynamic(() => import('qrcode.react'), { ssr: false }) as any
 export default function Tela() {
   const [qrValue, setQrValue] = useState('')
 
